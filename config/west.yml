@@ -4,6 +4,8 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: telzo2000
       url-base: https://github.com/telzo2000
+    - name: pasokata
+      url-base: https://github.com/pasokata
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -12,5 +14,8 @@ manifest:
     - name: zmk-pmw3610-driver
       remote: telzo2000
       revision: main
+    - name: zmk-behavior-swapper
+      remote: pasokata
+      revision: main      
   self:
     path: config
