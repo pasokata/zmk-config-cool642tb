@@ -2,6 +2,7 @@
 #include <behaviors/swapper.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/mouse.h>
 
@@ -13,10 +14,11 @@
 
 / {
     behaviors {
-        rot_msc: sensor_rotate_msc {
-            compatible = "zmk,behavior-sensor-rotate-var";
-            #sensor-binding-cells = <2>;
-            bindings = <&msc>, <&msc>;
+        scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+            tap-ms = <20>;
         };
     };
 
@@ -31,17 +33,17 @@
 &none       &none    &none             &kp LSHFT     &mo NAV       &kp TAB               &kp SPACE              &mo SYM                                      &none
             >;
 
-            sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
+            sensor-bindings = <&scroll_up_down>;
         };
 
         MOU { 
             bindings = <
 &trans       &trans    &trans            &trans          &trans                                                        &trans          &trans        &trans      &trans          &trans
-&trans       &trans    &trans            &trans          &trans         &trans                  &trans                 &trans          &mo SYM       &trans      &trans          &trans
-&trans       &trans    &trans            &trans          &trans         &trans                  &trans                 &trans          &mkp MB1      &mkp MB3    &mkp MB2        &mo MOU
+&trans       &trans    &trans            &trans          &trans         &trans                  &trans                 &mkp MB5        &mo SYM       &trans      &trans          &trans
+&trans       &trans    &trans            &trans          &trans         &trans                  &trans                 &mkp MB4        &mkp MB1      &mkp MB3    &mkp MB2        &mo MOU
 &trans       &trans    &trans            &trans          &trans         &trans                  &trans                 &trans                                                    &trans
             >;
-            sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
+            sensor-bindings = <&scroll_up_down>;
         };
 
         SYM {
@@ -52,7 +54,7 @@
 &none            &none          &none        &trans       &trans        &trans            &trans             &trans                                                                     &trans
             >;
 
-            sensor-bindings = <&rot_msc SCRL_RIGHT SCRL_LEFT>;
+            sensor-bindings = <&scroll_up_down>;
         };
 
         NAV {
@@ -63,7 +65,7 @@
 &none            &none             &none             &trans          &trans               &trans      &trans              &trans                                                               &trans
             >;
 
-            sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
+            sensor-bindings = <&scroll_up_down>;
         };
 
         NUM {
@@ -74,7 +76,7 @@
 &none            &none             &none             &trans          &trans               &trans      &trans              &trans                                                  &trans
             >;
 
-            sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
+            sensor-bindings = <&scroll_up_down>;
         };
     };
 
